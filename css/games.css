@@ -120,4 +120,137 @@
 .bet-cell:hover { border-color: var(--brand); }
 .bet-cell.red { background: #2a0f18; border-color: #4a1a26; }
 .bet-cell.black { background: #0f0f14; }
-.bet-cell.green { background: #0c2218; border-color: #174033
+.bet-cell.green { background: #0c2218; border-color: #174033; grid-column: span 6; }
+.bet-cell.selected { outline: 2px solid var(--brand); }
+.bet-cell .bet-marker {
+  position: absolute; top: 2px; right: 4px;
+  font-size: 10px; font-weight: 800;
+  background: var(--gold); color: #111;
+  border-radius: 6px; padding: 1px 5px;
+}
+
+.slots-machine {
+  background: linear-gradient(180deg, #1a1740, #0f1020);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 20px;
+  display: grid; gap: 14px;
+}
+.reels {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+  background: #05060a; padding: 14px; border-radius: 14px;
+  border: 1px solid var(--line);
+}
+.reel-column { display: grid; grid-template-rows: repeat(3, 1fr); gap: 6px; }
+.reel-cell {
+  height: 68px; border-radius: 10px;
+  background: linear-gradient(180deg, #15172a, #0d0e1a);
+  display: grid; place-items: center;
+  font-size: 34px;
+  border: 1px solid var(--line);
+  position: relative;
+  transition: background var(--trans);
+}
+.reel-cell.spin { animation: reelSpin 200ms linear infinite; }
+.reel-cell.win { background: linear-gradient(180deg, #2a1a4a, #1a1030); border-color: var(--gold); box-shadow: 0 0 20px rgba(246,197,99,.4); }
+@keyframes reelSpin { 0% { transform: translateY(-4px); } 50% { transform: translateY(4px); } 100% { transform: translateY(-4px); } }
+
+.paytable { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+.paytable th, .paytable td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; }
+.paytable th { color: var(--muted); font-weight: 500; font-size: 12px; }
+
+.controls {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  background: var(--bg-1); border: 1px solid var(--line);
+  border-radius: 14px; padding: 14px;
+}
+.controls .bet-amount { font-size: 12px; color: var(--muted); }
+.controls .bet-value { font-weight: 700; }
+
+.round-result {
+  padding: 12px 14px; border-radius: 12px;
+  background: var(--bg-2); border: 1px solid var(--line);
+  font-weight: 600;
+}
+.round-result.win { border-color: rgba(23,209,165,.5); color: var(--accent); }
+.round-result.loss { border-color: rgba(255,77,109,.5); color: var(--danger); }
+.round-result.push { border-color: rgba(246,197,99,.5); color: var(--gold); }
+
+.history-list { display: flex; flex-direction: column; gap: 8px; }
+.history-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px 90px;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--bg-1); border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 13px;
+}
+.history-row .time { color: var(--muted); }
+.history-row .value.positive { color: var(--accent); font-weight: 700; }
+.history-row .value.negative { color: var(--danger); font-weight: 700; }
+.history-row .value.credit { color: var(--brand-2); font-weight: 700; }
+.history-row .tag {
+  font-size: 11px; padding: 3px 8px; border-radius: 999px;
+  background: var(--bg-2); border: 1px solid var(--line); justify-self: end;
+}
+@media (max-width: 600px) {
+  .history-row { grid-template-columns: 60px 1fr 80px; }
+  .history-row .tag { display: none; }
+}
+
+.withdraw-card {
+  background: var(--bg-1); border: 1px solid var(--line);
+  border-radius: 16px; padding: 20px; max-width: 520px;
+}
+.withdraw-note {
+  background: rgba(255,184,77,.08);
+  border: 1px solid rgba(255,184,77,.3);
+  color: var(--warn); padding: 12px 14px;
+  border-radius: 12px; font-size: 13px; margin: 12px 0;
+}
+
+/* Blackjack hands */
+.bj-hands { display: flex; gap: 20px; flex-wrap: wrap; }
+.bj-hand {
+  background: rgba(0,0,0,.2); border: 1px solid var(--line);
+  border-radius: 12px; padding: 12px;
+  min-width: 220px;
+}
+.bj-hand.active { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(108,92,255,.25); }
+.bj-hand.win { border-color: var(--accent); }
+.bj-hand.loss { border-color: var(--danger); }
+.bj-hand.push { border-color: var(--gold); }
+.bj-hand .hand-title { font-size: 11px; letter-spacing: .12em; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+.bj-hand .hand-cards { display: flex; gap: 6px; flex-wrap: wrap; }
+.bj-hand .hand-cards .card { width: 54px; height: 76px; font-size: 11px; }
+.bj-hand .hand-cards .card .mid { font-size: 20px; }
+.bj-hand .hand-score { margin-top: 8px; font-size: 13px; font-weight: 700; }
+.bj-hand .hand-result { margin-top: 6px; font-size: 12px; font-weight: 600; }
+
+/* Baccarat beads */
+.beads {
+  display: flex; gap: 4px; flex-wrap: wrap; padding: 12px;
+  background: rgba(0,0,0,.2); border-radius: 12px; border: 1px solid var(--line);
+  max-height: 220px; overflow-y: auto;
+}
+.bead {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 11px; font-weight: 800;
+  border: 1px solid var(--line);
+}
+.bead.p { background: #0c3a5a; color: #7fc8ff; }
+.bead.b { background: #5a0c1a; color: #ff9aac; }
+.bead.t { background: #0c5a3a; color: #7fffc8; }
+
+.stats-inline {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px; padding: 12px;
+  background: var(--bg-1); border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.stats-inline .cell { text-align: center; }
+.stats-inline .cell .k { font-size: 10px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+.stats-inline .cell .v { font-size: 16px; font-weight: 700; }
