@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>NOVA7 — Cassino Virtual Demonstrativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="stylesheet" href="css/games.css" />
+<link rel="stylesheet" href="css/aviator.css" />
+</head>
+<body>
+
+<!-- WELCOME -->
+<div id="welcome" class="welcome-overlay hidden">
+  <div class="welcome-card">
+    <div class="brand-mark"><span>N7</span></div>
+    <h1>BEM-VINDO AO NOVA7 DEMO</h1>
+    <p>Você recebeu <strong>R$ 10.000,00</strong> em créditos fictícios para testar os jogos.</p>
+    <p class="demo-note">DEMO — TODOS OS VALORES SÃO FICTÍCIOS E NÃO POSSUEM VALOR MONETÁRIO.</p>
+    <button id="btn-start" class="btn-primary">COMEÇAR</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="app hidden">
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark small"><span>N7</span></div>
+      <span class="brand-name">NOVA7</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" data-view="dashboard" class="nav-item active"><i class="fa-solid fa-house"></i><span>Dashboard</span></a>
+      <a href="#" data-view="favorites" class="nav-item"><i class="fa-solid fa-star"></i><span>Favoritos</span></a>
+      <a href="#" data-view="history" class="nav-item"><i class="fa-solid fa-clock-rotate-left"></i><span>Histórico</span></a>
+      <a href="#" data-view="stats" class="nav-item"><i class="fa-solid fa-chart-line"></i><span>Estatísticas</span></a>
+      <a href="#" data-view="profile" class="nav-item"><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+      <a href="#" data-view="withdraw" class="nav-item"><i class="fa-solid fa-money-bill-transfer"></i><span>Saque Virtual</span></a>
+      <a href="#" data-view="settings" class="nav-item"><i class="fa-solid fa-gear"></i><span>Configurações</span></a>
+    </nav>
+    <div class="sidebar-foot">
+      <p class="demo-note small">DEMO — VALORES FICTÍCIOS</p>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button id="menu-toggle" class="icon-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="balance-block">
+        <span class="balance-label">SALDO VIRTUAL</span>
+        <span id="balance" class="balance-value">R$ 10.000,00</span>
+        <span class="demo-note">DEMO — TODOS OS VALORES SÃO FICTÍCIOS E NÃO POSSUEM VALOR MONETÁRIO.</span>
+      </div>
+      <div class="topbar-actions">
+        <button id="btn-add-balance" class="btn-ghost"><i class="fa-solid fa-plus"></i> <span>ADICIONAR SALDO</span></button>
+        <button id="btn-notify" class="icon-btn" aria-label="Notificações"><i class="fa-regular fa-bell"></i></button>
+      </div>
+    </header>
+
+    <main id="view" class="view"></main>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="#" data-view="dashboard" class="bottom-item active"><i class="fa-solid fa-house"></i><span>Início</span></a>
+    <a href="#" data-view="favorites" class="bottom-item"><i class="fa-solid fa-star"></i><span>Favs</span></a>
+    <a href="#" data-view="history" class="bottom-item"><i class="fa-solid fa-clock-rotate-left"></i><span>Histórico</span></a>
+    <a href="#" data-view="profile" class="bottom-item"><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+  </nav>
+</div>
+
+<!-- MODAIS -->
+<div id="modal-root" class="modal-root hidden">
+  <div class="modal-backdrop" data-close="1"></div>
+  <div class="modal" role="dialog" aria-modal="true">
+    <header class="modal-head">
+      <h2 id="modal-title">Título</h2>
+      <button class="icon-btn" data-close="1" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+    </header>
+    <div id="modal-body" class="modal-body"></div>
+    <footer id="modal-foot" class="modal-foot"></footer>
+  </div>
+</div>
+
+<div id="add-balance-modal" class="modal-root hidden">
+  <div class="modal-backdrop" data-close-balance="1"></div>
+  <div class="modal">
+    <header class="modal-head">
+      <h2>Adicionar saldo virtual</h2>
+      <button class="icon-btn" data-close-balance="1" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+    </header>
+    <div class="modal-body">
+      <p class="demo-note">Créditos fictícios. Nenhum valor monetário real está envolvido.</p>
+      <div class="chip-grid" id="quick-credit">
+        <button class="chip" data-amount="100">R$ 100</button>
+        <button class="chip" data-amount="500">R$ 500</button>
+        <button class="chip" data-amount="1000">R$ 1.000</button>
+        <button class="chip" data-amount="5000">R$ 5.000</button>
+      </div>
+      <label class="field">
+        <span>Valor personalizado</span>
+        <input id="custom-credit" type="number" min="1" max="1000000" step="1" placeholder="Ex: 250" />
+      </label>
+    </div>
+    <footer class="modal-foot">
+      <button class="btn-ghost" data-close-balance="1">Cancelar</button>
+      <button class="btn-primary" id="btn-confirm-credit">Adicionar</button>
+    </footer>
+  </div>
+</div>
+
+<div id="toasts" class="toasts"></div>
+
+<script src="js/wallet.js"></script>
+<script src="js/history.js"></script>
+<script src="js/notify.js"></script>
+<script src="js/difficulty.js"></script>
+<script src="js/aviator.js"></script>
+<script src="js/baccarat.js"></script>
+<script src="js/bacbo.js"></script>
+<script src="js/roulette.js"></script>
+<script src="js/blackjack.js"></script>
+<script src="js/slots.js"></script>
+<script src="js/crash.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
