@@ -1,0 +1,123 @@
+.game-shell { display: flex; flex-direction: column; gap: 16px; }
+.game-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.game-header h1 { margin: 0; font-size: 20px; }
+.game-header .tools { display: flex; gap: 8px; }
+
+.table-stage {
+  background: linear-gradient(180deg, #0e1830, #0a1220);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  min-height: 240px;
+  position: relative;
+  overflow: hidden;
+}
+.table-stage.green { background: linear-gradient(180deg, #0c2218, #071610); }
+
+.hand-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.hand-label { font-size: 11px; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; min-width: 80px; }
+
+.card {
+  width: 68px; height: 96px;
+  background: #f6f7fb; color: #111;
+  border-radius: 8px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 6px 8px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  animation: dealIn 260ms ease;
+  position: relative;
+}
+.card .top { font-size: 14px; }
+.card .mid { font-size: 26px; text-align: center; align-self: center; }
+.card .bot { font-size: 14px; align-self: flex-end; transform: rotate(180deg); }
+.card.red { color: #c22; }
+.card.back {
+  background: repeating-linear-gradient(45deg, #1a1a3a 0 6px, #232354 6px 12px);
+  color: transparent;
+}
+.card.back .top, .card.back .mid, .card.back .bot { visibility: hidden; }
+@keyframes dealIn { from { transform: translateY(-30px) rotate(-8deg); opacity: 0; } to { transform: translateY(0) rotate(0); opacity: 1; } }
+
+.score-pill {
+  display: inline-block; padding: 4px 10px; border-radius: 999px;
+  background: var(--bg-2); border: 1px solid var(--line);
+  font-size: 12px; font-weight: 600;
+}
+
+.dice-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.die {
+  width: 56px; height: 56px;
+  background: #f6f7fb; color: #111;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  font-size: 26px; font-weight: 800;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+.die.rolling { animation: roll 700ms ease infinite; }
+@keyframes roll {
+  0% { transform: rotate(0) scale(1); }
+  25% { transform: rotate(90deg) scale(1.05); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(270deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.roulette-wrap { display: grid; grid-template-columns: 340px 1fr; gap: 20px; }
+@media (max-width: 900px) { .roulette-wrap { grid-template-columns: 1fr; } }
+.wheel-holder { display: grid; place-items: center; padding: 10px; }
+.wheel {
+  width: 280px; height: 280px; border-radius: 50%;
+  border: 8px solid #2a1c10;
+  background: conic-gradient(
+    #c0392b 0deg 9.73deg, #111 9.73deg 19.46deg,
+    #c0392b 19.46deg 29.19deg, #111 29.19deg 38.92deg,
+    #c0392b 38.92deg 48.65deg, #111 48.65deg 58.38deg,
+    #c0392b 58.38deg 68.11deg, #111 68.11deg 77.84deg,
+    #c0392b 77.84deg 87.57deg, #111 87.57deg 97.3deg,
+    #c0392b 97.3deg 107.03deg, #111 107.03deg 116.76deg,
+    #c0392b 116.76deg 126.49deg, #111 126.49deg 136.22deg,
+    #c0392b 136.22deg 145.95deg, #111 145.95deg 155.68deg,
+    #c0392b 155.68deg 165.41deg, #111 165.41deg 175.14deg,
+    #c0392b 175.14deg 184.87deg, #111 184.87deg 194.6deg,
+    #c0392b 194.6deg 204.33deg, #111 204.33deg 214.06deg,
+    #c0392b 214.06deg 223.79deg, #111 223.79deg 233.52deg,
+    #c0392b 233.52deg 243.25deg, #111 243.25deg 252.98deg,
+    #c0392b 252.98deg 262.71deg, #111 262.71deg 272.44deg,
+    #c0392b 272.44deg 282.17deg, #111 282.17deg 291.9deg,
+    #c0392b 291.9deg 301.63deg, #111 301.63deg 311.36deg,
+    #c0392b 311.36deg 321.09deg, #111 321.09deg 330.82deg,
+    #c0392b 330.82deg 340.55deg, #111 340.55deg 350.28deg,
+    #2ecc71 350.28deg 360deg
+  );
+  position: relative;
+  transition: transform 4s cubic-bezier(.15,.85,.25,1);
+  box-shadow: 0 20px 50px rgba(0,0,0,.55), inset 0 0 40px rgba(0,0,0,.6);
+}
+.wheel::after {
+  content: ""; position: absolute; inset: 32%;
+  background: var(--bg-1); border-radius: 50%;
+  border: 4px solid #2a1c10;
+}
+.wheel-pointer {
+  position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 10px solid transparent; border-right: 10px solid transparent;
+  border-top: 18px solid var(--gold); z-index: 2;
+}
+
+.bet-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.bet-cell {
+  background: var(--bg-2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 12px 6px;
+  font-size: 12px; font-weight: 600; color: var(--text);
+  transition: all var(--trans);
+  position: relative;
+}
+.bet-cell:hover { border-color: var(--brand); }
+.bet-cell.red { background: #2a0f18; border-color: #4a1a26; }
+.bet-cell.black { background: #0f0f14; }
+.bet-cell.green { background: #0c2218; border-color: #174033
