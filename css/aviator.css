@@ -1,0 +1,129 @@
+.aviator-shell {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .aviator-shell { grid-template-columns: 1fr; }
+}
+
+.aviator-stage {
+  position: relative;
+  height: 420px;
+  background:
+    radial-gradient(600px 300px at 20% 0%, rgba(108,92,255,.18), transparent 60%),
+    linear-gradient(180deg, #0b1030, #050710);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+@media (max-width: 600px) { .aviator-stage { height: 320px; } }
+
+.aviator-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.aviator-plane {
+  position: absolute;
+  font-size: 30px;
+  color: var(--gold);
+  z-index: 3;
+  transition: none;
+  filter: drop-shadow(0 0 12px rgba(246,197,99,.5));
+  will-change: transform;
+}
+
+.aviator-mult {
+  position: absolute;
+  top: 20px; left: 0; right: 0;
+  text-align: center;
+  font-size: 62px; font-weight: 800;
+  color: var(--accent);
+  text-shadow: 0 0 40px rgba(23,209,165,.35);
+  letter-spacing: -.02em;
+  z-index: 2;
+  pointer-events: none;
+}
+.aviator-mult.crashed {
+  color: var(--danger);
+  text-shadow: 0 0 40px rgba(255,77,109,.5);
+  animation: crashShake 400ms ease;
+}
+@keyframes crashShake {
+  0%,100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+.aviator-status {
+  position: absolute;
+  bottom: 14px; left: 14px;
+  font-size: 12px; color: var(--muted);
+  background: rgba(10,11,15,.6);
+  padding: 6px 10px; border-radius: 8px;
+  border: 1px solid var(--line);
+  z-index: 3;
+}
+.aviator-countdown {
+  position: absolute;
+  bottom: 14px; right: 14px;
+  font-size: 12px; color: var(--warn);
+  background: rgba(10,11,15,.6);
+  padding: 6px 10px; border-radius: 8px;
+  border: 1px solid var(--line);
+  z-index: 3;
+  font-variant-numeric: tabular-nums;
+}
+
+.aviator-side {
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--bg-1); border: 1px solid var(--line);
+  border-radius: 18px; padding: 16px;
+}
+.aviator-side .side-block { display: flex; flex-direction: column; gap: 6px; }
+.aviator-side .side-block .label {
+  font-size: 10px; letter-spacing: .12em; color: var(--muted); text-transform: uppercase;
+}
+.aviator-side .bet-row {
+  display: flex; gap: 6px; align-items: center;
+  background: var(--bg-2); border: 1px solid var(--line);
+  border-radius: 10px; padding: 8px 10px;
+}
+.aviator-side .bet-row input {
+  background: transparent; border: 0; color: var(--text);
+  width: 100%; font-size: 18px; font-weight: 700; font-family: inherit;
+}
+.aviator-side .bet-row input:focus { outline: none; }
+.aviator-side .bet-quick { display: flex; gap: 4px; flex-wrap: wrap; }
+.aviator-side .bet-quick .chip { padding: 6px 10px; font-size: 12px; }
+
+.aviator-side .btn-bet {
+  width: 100%; padding: 14px;
+  font-size: 15px; font-weight: 800;
+  letter-spacing: .04em;
+}
+.aviator-side .btn-cash {
+  width: 100%; padding: 14px;
+  font-size: 15px; font-weight: 800;
+  letter-spacing: .04em;
+  background: linear-gradient(135deg, #0fae7a, #17d1a5);
+  color: #04221a; border: 0;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--trans);
+}
+.aviator-side .btn-cash:disabled { opacity: .35; cursor: not-allowed; }
+
+.aviator-history {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  max-height: 140px; overflow-y: auto;
+  padding-right: 4px;
+}
+.aviator-history .h-chip {
+  padding: 4px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 700;
+  background: var(--bg-2); border: 1px solid var(--line);
+}
+.aviator-history .h-chip.low { color: #8fa2c4; }
+.aviator-history .h-chip.mid { color: var(--brand-2); border-color: rgba(143,125,255,.4); }
+.aviator-history .h-chip.high { color: var(--gold); border-color: rgba(246,197,99,.5); background: rgba(246,197,99,.08); }
+.aviator-history .h-chip.mega { color: var(--accent); border-color: rgba(23,209,165,.5); background: rgba(23,209,165,.08); }
