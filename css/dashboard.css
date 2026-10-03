@@ -1,0 +1,78 @@
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+.game-card {
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform var(--trans), border-color var(--trans), box-shadow var(--trans);
+  position: relative;
+}
+.game-card:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: var(--shadow-sm); }
+.game-card .thumb {
+  height: 130px;
+  background: linear-gradient(135deg, #1a1533, #0f1020);
+  display: grid; place-items: center;
+  font-size: 46px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.game-card .thumb::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(400px 120px at 30% 20%, rgba(108,92,255,.35), transparent 60%);
+}
+.game-card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.game-card h3 { margin: 0; font-size: 16px; }
+.game-card p { margin: 0; color: var(--muted); font-size: 13px; flex: 1; }
+.game-card .foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.pop { font-size: 12px; color: var(--muted); }
+.pop .dot { color: var(--accent); }
+.fav-btn {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(10,11,15,.7); border: 1px solid var(--line);
+  color: var(--gold); width: 34px; height: 34px;
+  border-radius: 10px; display: grid; place-items: center;
+  z-index: 2;
+  transition: transform var(--trans);
+}
+.fav-btn:hover { transform: scale(1.06); }
+.fav-btn.on { background: rgba(246,197,99,.18); border-color: var(--gold); }
+
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px; margin-top: 12px;
+}
+.stat-card {
+  background: var(--bg-1); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 14px 16px;
+}
+.stat-card .label { font-size: 11px; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+.stat-card .value { font-size: 20px; font-weight: 700; margin-top: 4px; }
+.stat-card.positive .value { color: var(--accent); }
+.stat-card.negative .value { color: var(--danger); }
+
+.section-title {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 22px 0 4px;
+}
+.section-title h2 { margin: 0; font-size: 16px; letter-spacing: .04em; }
+
+.balance-hero {
+  background: linear-gradient(135deg, #1b1740, #0f1020);
+  border: 1px solid var(--line);
+  border-radius: 18px; padding: 22px;
+  position: relative; overflow: hidden;
+}
+.balance-hero::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(500px 200px at 90% 20%, rgba(108,92,255,.28), transparent 60%);
+}
+.balance-hero h3 { margin: 0; font-size: 12px; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+.balance-hero .big { font-size: 34px; font-weight: 800; color: var(--accent); margin-top: 6px; position: relative; z-index: 1; }
+.balance-hero .actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; position: relative; z-index: 1; }
